@@ -1,0 +1,100 @@
+﻿@model WATest.Entities.Prestamo
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Editar</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <hr />
+    @{ 
+        Model.FechaPrestamo = Convert.ToDateTime(Model.FechaPrestamo.ToString("yyyy-dd-MM"));
+
+        if (Model.FechaDevolucion != null) {
+            var fecha = Convert.ToDateTime(Model.FechaDevolucion);
+            try
+            {
+                Model.FechaDevolucion = Convert.ToDateTime(fecha.ToString("yyyy-dd-MM"));
+
+            }
+            catch (Exception ex) { }
+        }
+        }
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.IdLector)
+    @Html.HiddenFor(model => model.IdLibro)
+    @{ var fechaprestado = Model.FechaPrestamo.ToString("yyyy-dd-MM"); }
+    <input data-val="true" data-val-date="El campo FechaPrestamo debe ser una fecha." data-val-required="El campo FechaPrestamo es obligatorio." id="FechaPrestamo" name="FechaPrestamo" type="hidden" value="@fechaprestado ">
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Estudiante</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Estudiante.Nombre, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-2">Libro</label>
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Libro.Titulo, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-md-2">Fecha Prestamo </label>
+        <div class="col-md-10">
+            <input class="form-control text-box single-line"  type="date" readonly="readonly" value="@fechaprestado">
+            @*@Html.EditorFor(model => model.FechaPrestamo, new { htmlAttributes = new { @class = "form-control", @value = Model.FechaPrestamo.ToString("MM/dd/yyyy 00:00:00") } })*@
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.FechaDevolucion, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @{
+                string fechadevolucion = "";
+                if (Model.FechaDevolucion != null)
+                {
+                    fechadevolucion = Convert.ToDateTime(Model.FechaDevolucion).ToString("yyyy-dd-MM");
+
+                }
+
+            }
+
+            <input class="form-control text-box single-line" data-val="true" data-val-date="El campo FechaDevolucion debe ser una fecha." id="FechaDevolucion" name="FechaDevolucion" type="date" value="@fechadevolucion">
+            @*@Html.EditorFor(model => model.FechaDevolucion, new { htmlAttributes = new { @class = "form-control", @value = fechadevolucion } })*@
+            @Html.ValidationMessageFor(model => model.FechaDevolucion, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Devuelvo, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            <div class="checkbox">
+                @Html.EditorFor(model => model.Devuelvo)
+                @Html.ValidationMessageFor(model => model.Devuelvo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Guardar" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Volver a la lista", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<WATest.Entities.Estudiante>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Inicio</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CI)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Carrera)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Edad)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CI)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Carrera)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Edad)
+        </td>
+        <td>
+            @Html.ActionLink("Editar", "Edit", new { id=item.IdLector }) |
+            @Html.ActionLink("Detalle", "Details", new { id=item.IdLector }) |
+            @Html.ActionLink("Eliminar", "Delete", new { id=item.IdLector })
+        </td>
+    </tr>
+}
+
+</table>

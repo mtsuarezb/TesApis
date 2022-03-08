@@ -1,0 +1,42 @@
+﻿@model WATest.Entities.Libro
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+<div>
+        <h4>Libro</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Titulo)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Titulo)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Editorial)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Editorial)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Area)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Area)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdLibro }) |
+        @Html.ActionLink("Volver", "Index")
+    </p>
+

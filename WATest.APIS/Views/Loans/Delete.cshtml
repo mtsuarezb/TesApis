@@ -1,0 +1,55 @@
+﻿@model WATest.Entities.Prestamo
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Eliminar</h2>
+
+<h3>¿Estás seguro que desea eliminar este registro?</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Estudiante.CI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Estudiante.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Libro.Titulo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Libro.Titulo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDevolucion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDevolucion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Devuelvo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Devuelvo)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Eliminar" class="btn btn-default" /> |
+            @Html.ActionLink("Volver a la lista", "Index")
+        </div>
+    }
+</div>
